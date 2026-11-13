@@ -36,6 +36,23 @@ picks up from.
 /code-health onboarding
 ```
 
+## Install
+
+With [`skills`](https://github.com/vercel-labs/skills), for whichever agents you use:
+
+```sh
+npx skills add CarlosBonetti/code-health
+```
+
+Add `-g` to install it for your user rather than the current project, and `-a <agent>` to pick the agents.
+
+In Claude Code it also installs as a plugin:
+
+```
+/plugin marketplace add CarlosBonetti/code-health
+/plugin install code-health@code-health
+```
+
 ## What a run does
 
 1. Reads the project's agent instructions and runs its checks for a baseline.
@@ -59,23 +76,6 @@ sessions: it uses the `tower` command to find itself, hire reviewers, leave note
 
 Outside the tower the modes and rules still apply, but the review, end-to-end and reporting steps that call `tower`
 won't run as written.
-
-## Install
-
-With [`skills`](https://github.com/vercel-labs/skills), for whichever agents you use:
-
-```sh
-npx skills add CarlosBonetti/code-health
-```
-
-Add `-g` to install it for your user rather than the current project, and `-a <agent>` to pick the agents.
-
-In Claude Code it also installs as a plugin:
-
-```
-/plugin marketplace add CarlosBonetti/code-health
-/plugin install code-health@code-health
-```
 
 ## Contributing
 
