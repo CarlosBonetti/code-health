@@ -76,18 +76,6 @@ git clone https://github.com/CarlosBonetti/code-health.git
 ln -s "$PWD/code-health/skills/code-health" ~/.claude/skills/code-health
 ```
 
-## Repository layout
-
-```
-.claude-plugin/
-  plugin.json        plugin manifest (name, version, author)
-  marketplace.json   lets /plugin marketplace add install it
-skills/code-health/
-  SKILL.md           the skill itself: frontmatter, rules and the ten modes
-CHANGELOG.md
-LICENSE
-```
-
 ## Contributing
 
 Issues and pull requests are welcome. A change to a mode should say what went wrong on a real run without it, and
