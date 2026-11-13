@@ -1,0 +1,17 @@
+{
+  "name": "code-health",
+  "owner": {
+    "name": "Carlos Bonetti",
+    "url": "https://github.com/CarlosBonetti"
+  },
+  "plugins": [
+    {
+      "name": "code-health",
+      "source": "./",
+      "description": "Leave a codebase healthier in one focused, reviewable change, in one of ten modes."
+    }
+  ],
+  "metadata": {
+    "description": "The code-health agent skill: one focused, reviewable change per run, in one of ten modes."
+  }
+}
