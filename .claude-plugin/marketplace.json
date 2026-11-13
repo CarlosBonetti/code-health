@@ -8,10 +8,10 @@
     {
       "name": "code-health",
       "source": "./",
-      "description": "Leave a codebase healthier in one focused, reviewable change, in one of ten modes."
+      "description": "Leave a codebase healthier in one focused, reviewable change."
     }
   ],
   "metadata": {
-    "description": "The code-health agent skill: one focused, reviewable change per run, in one of ten modes."
+    "description": "The code-health agent skill: one focused, reviewable change per run."
   }
 }

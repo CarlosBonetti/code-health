@@ -1,6 +1,6 @@
 {
   "name": "code-health",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Leave a codebase healthier in one focused, reviewable change: tests, abstractions, dead code, dependencies, security, performance, setup, docs, structure and onboarding.",
   "author": { "name": "Carlos Bonetti", "url": "https://github.com/CarlosBonetti" },
   "homepage": "https://github.com/CarlosBonetti/code-health",
