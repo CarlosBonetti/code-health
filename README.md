@@ -61,6 +61,14 @@ In Claude Code it also installs as a plugin:
 4. Gets the change reviewed by a worker without its context, and exercised end to end when it can reach runtime.
 5. Writes a report to `.context/code-health/<mode>/<YYYY-MM-DD>.md`, and opens a PR only when asked.
 
+## Why
+
+Codebases decay a little with every change, and the work that keeps them healthy rarely wins a slot next to features.
+That work is also what agents can do unattended. Each run is self-contained, picks its own area and leaves a report the
+next run continues from, so it can be scheduled for when nobody is working: nights, weekends, or the end of a usage
+window with tokens left over. Tokens a subscription would otherwise let go to waste turn into a steady stream of small,
+reviewed improvements.
+
 ## Principles
 
 Each mode states a goal and why it matters, not the steps to reach it. Agents keep getting more capable and creative,
