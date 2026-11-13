@@ -62,18 +62,19 @@ won't run as written.
 
 ## Install
 
-As a Claude Code plugin, from this repository's marketplace:
+With [`skills`](https://github.com/vercel-labs/skills), for whichever agents you use:
+
+```sh
+npx skills add CarlosBonetti/code-health
+```
+
+Add `-g` to install it for your user rather than the current project, and `-a <agent>` to pick the agents.
+
+In Claude Code it also installs as a plugin:
 
 ```
 /plugin marketplace add CarlosBonetti/code-health
 /plugin install code-health@code-health
-```
-
-Or as a personal skill, by linking it into `~/.claude/skills`:
-
-```sh
-git clone https://github.com/CarlosBonetti/code-health.git
-ln -s "$PWD/code-health/skills/code-health" ~/.claude/skills/code-health
 ```
 
 ## Contributing
