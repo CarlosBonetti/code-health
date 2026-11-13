@@ -53,9 +53,9 @@ steps or special cases.
 
 ## Requirements
 
-The skill is written for workers in **the tower**, a local HQ for Claude Code sessions: it uses the `tower` command to
-find itself, hire reviewers, leave notes and show its report. Run as a tower **policy**, it becomes standing work on a
-schedule, each run reading what the last one left.
+The skill is written for workers in [**the tower**](https://github.com/RegiByte/the-tower), a local HQ for Claude Code
+sessions: it uses the `tower` command to find itself, hire reviewers, leave notes and show its report. Run as a tower
+**policy**, it becomes standing work on a schedule, each run reading what the last one left.
 
 Outside the tower the modes and rules still apply, but the review, end-to-end and reporting steps that call `tower`
 won't run as written.
