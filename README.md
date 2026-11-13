@@ -44,6 +44,13 @@ picks up from.
 4. Gets the change reviewed by a worker without its context, and exercised end to end when it can reach runtime.
 5. Writes a report to `.context/code-health/<mode>/<YYYY-MM-DD>.md`, and opens a PR only when asked.
 
+## Principles
+
+Each mode states a goal and why it matters, not the steps to reach it. Agents keep getting more capable and creative,
+so a focused goal gets better work out of them than an ever more refined procedure, and it doesn't age as models
+improve. Modes stay generic for the same reason: a fix to a mode sharpens its goal or judgement rather than adding
+steps or special cases.
+
 ## Requirements
 
 The skill is written for workers in **the tower**, a local HQ for Claude Code sessions: it uses the `tower` command to
@@ -83,9 +90,9 @@ LICENSE
 
 ## Contributing
 
-Issues and pull requests are welcome. A change to a mode should say what went wrong on a real run without it. See
-[`CLAUDE.md`](CLAUDE.md) for the conventions an agent (or you) should follow when editing the skill, and record every
-user-visible change in [`CHANGELOG.md`](CHANGELOG.md).
+Issues and pull requests are welcome. A change to a mode should say what went wrong on a real run without it, and
+follow the [principles](#principles). See [`CLAUDE.md`](CLAUDE.md) for the conventions an agent (or you) should follow
+when editing the skill, and record every user-visible change in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## License
 
