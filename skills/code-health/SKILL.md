@@ -1,13 +1,13 @@
 ---
 name: code-health
-description: Leave a codebase healthier in one focused, reviewable change. Modes - `tests` (a suite that catches real breakage and is cheap to maintain), `abstractions` (one implementation per idea, abstractions that earn their keep), `dead-code` (delete what nothing uses), `dependencies` (no known advisories, no dependency left far behind), `security` (no vulnerability an attacker could realistically use), `performance` (fast where users and costs feel it), `setup` (setup and deploy instructions that work as written), `docs` (docstrings, comments and docs that tell the truth about the code), `structure` (a folder layout that's easy to navigate, with boundaries that hold) and `onboarding` (a fresh agent gets oriented fast, judged from how recent agent sessions fared). Use when started as `/code-health <mode> [area] [auto]`, or when asked to review or clean up tests, find duplication or over-abstraction, remove dead or unused code, do a dependency audit or upgrade, find and fix security vulnerabilities, find and fix slow or costly code paths, check that setup or deploy docs still work, fix stale comments or docs, review a repository's folder structure or layering, or find what slows agents down in a codebase from their session logs. Written for tower workers, by hand or as the prompt of a policy run.
+description: Leave a codebase healthier in one focused, reviewable change. Modes - `tests` (a suite that catches real breakage and is cheap to maintain), `abstractions` (one implementation per idea, abstractions that earn their keep), `dead-code` (delete what nothing uses), `dependencies` (no known advisories, no dependency left far behind), `security` (no vulnerability an attacker could realistically use), `performance` (fast where users and costs feel it), `setup` (setup and deploy instructions that work as written), `docs` (docstrings, comments and docs that tell the truth about the code), `structure` (a folder layout that's easy to navigate, with boundaries that hold) and `onboarding` (a fresh agent gets oriented fast, judged from how recent agent sessions fared). Use when started as `/code-health <mode> [area] [auto]`, or when asked to review or clean up tests, find duplication or over-abstraction, remove dead or unused code, do a dependency audit or upgrade, find and fix security vulnerabilities, find and fix slow or costly code paths, check that setup or deploy docs still work, fix stale comments or docs, review a repository's folder structure or layering, or find what slows agents down in a codebase from their session logs. Runs by hand, or unattended on a schedule.
 ---
 
 # Code health
 
 Leave the codebase better than you found it, in **one focused change a reviewer can read in one sitting**. A small change gets a real review, and a run that goes deep on one area finds what a sweep misses.
 
-You are a worker in the tower. Run `tower whoami` first, and load `tower:handbook` before you hire anyone, write notes or end yourself: it has the current commands for each.
+Some steps need help from outside your context: a reviewer, a tester, a way to show the user your report. Use what your environment offers (subagents, separate sessions, a review tool). If you're running in the tower (a `tower` command is on your PATH), you are a tower worker: run `tower whoami` first, and load `tower:handbook` before you hire anyone, write notes, show a file or end yourself; it has the current commands for each, and its scheduled runs are called policies.
 
 ## Arguments
 
@@ -15,11 +15,11 @@ You are a worker in the tower. Run `tower whoami` first, and load `tower:handboo
 
 - **mode:** `tests`, `abstractions`, `dead-code`, `dependencies`, `security`, `performance`, `setup`, `docs`, `structure` or `onboarding`. Ask if it's missing and not obvious.
 - **area:** where to focus. Without one, pick an area recent runs haven't covered, where the mode is likely to pay off, and say why.
-- **auto:** run unattended. A policy run (`tower whoami` says so) is always unattended.
+- **auto:** run unattended. A scheduled or headless run is always unattended.
 
 Interactively, present the ranked findings and the change you propose, and wait for the user to choose before you edit. Unattended, never stop to ask: where a call is genuinely ambiguous, take the conservative option and say so in the report.
 
-Whoever invoked you (the user, or the policy whose prompt loaded this skill) may add rules: a report path, PR steps, project exclusions, how to run the app. Theirs win.
+Whoever invoked you (the user, or the scheduled job whose prompt loaded this skill) may add rules: a report path, PR steps, project exclusions, how to run the app. Theirs win.
 
 ## Before you start
 
@@ -119,7 +119,7 @@ Goal: a layout where someone new can guess where code lives, files that change t
 
 An improvement needs evidence that it solves a real problem, not just that it looks cleaner. When the better structure differs from the current one, write it down as a target layout with its rationale and migrate one piece toward it. A third convention next to two existing ones makes the layout harder to guess, so never leave one.
 
-Move one cluster per run, with its tests. A path is referenced in more places than imports (routing, config, CI, docs, outside consumers), so a move is done only when every reference follows it. Leave alone files that an open PR or an on-duty worker (`tower agents`) is changing.
+Move one cluster per run, with its tests. A path is referenced in more places than imports (routing, config, CI, docs, outside consumers), so a move is done only when every reference follows it. Leave alone files that an open PR or another agent's in-flight work is changing.
 
 Report also: the conventions you found, the target layout if you proposed one, the tree before and after, and remaining findings, with adherence and improvement findings kept apart.
 
@@ -129,7 +129,7 @@ Goal: an agent new to the codebase gets oriented fast. It finds the right file o
 
 A finding is a pattern, not an anecdote: something several sessions stumbled on, or one lost many steps to. Typical causes are code that is hard to guess at, knowledge that lives only in sessions that have ended, and instructions that are missing, wrong, contradictory or never reach the agent. Rank by the steps they cost across sessions, and fix the costliest at the cause. What another mode owns goes on the list for that mode.
 
-The repo is shared, so a fix there must help anyone working in this project. The agent instruction file loads into every session, so each line costs every future one: prefer a short doc it links to, and cut what no longer earns its place. Adding facts to it is yours; changing a rule in it is a proposal. What is particular to one user (their machine, shell, local services or habits) and causes outside the repo (the user's private instructions, memory or settings, the runtime's configuration, a policy's prompt) are proposals: write the exact change for the user. Session logs carry briefs, client details and sometimes secrets, so quotes from them stay in the report, never in a commit or PR.
+The repo is shared, so a fix there must help anyone working in this project. The agent instruction file loads into every session, so each line costs every future one: prefer a short doc it links to, and cut what no longer earns its place. Adding facts to it is yours; changing a rule in it is a proposal. What is particular to one user (their machine, shell, local services or habits) and causes outside the repo (the user's private instructions, memory or settings, the runtime's configuration, a scheduled job's prompt) are proposals: write the exact change for the user. Session logs carry briefs, client details and sometimes secrets, so quotes from them stay in the report, never in a commit or PR.
 
 A fix shows in later sessions, not in the diff. Measure each finding's cost in a way the next run can repeat, so each run says whether the last one's fixes worked.
 
@@ -139,13 +139,13 @@ Report also: the sessions read and their date range; each finding with the sessi
 
 Once the checks pass, get the change judged by someone without your context: you can't see your own blind spots. Match the effort to what a mistake would cost. A change that can break something gets both checks below; one that can't (a few lines nothing reaches, a comment) may need neither, and the report says why.
 
-**Review.** Hire a reviewer on your checkout's review thread, and give it what it needs: the mode, your evidence, and what you'd look hardest at. Answer every note, saying what changed or why it stays. If the fixes were substantial, get them reviewed again.
+**Review.** Get a reviewer that starts without your context, and give it what it needs: the mode, your evidence, and what you'd look hardest at. Answer every finding, saying what changed or why it stays, where the next reader will see it. If the fixes were substantial, get them reviewed again.
 
-**End-to-end, when the change can reach runtime** and the project has a way to exercise it. Have a worker you hire run the affected paths against your checkout, so the check doesn't share your assumptions. It starts with none of your context or uncommitted work, so its brief carries everything: who you are and how to report back, your checkout's path (it runs from there without editing), how to run the app without disturbing anyone else's instance, and what "working" means for each path. Hold your edits until it reports, fix what failed, and send it home. If you can't hire one, run the paths yourself and say the check wasn't independent.
+**End-to-end, when the change can reach runtime** and the project has a way to exercise it. Have a fresh agent run the affected paths against your checkout, so the check doesn't share your assumptions. It starts with none of your context or uncommitted work, so its brief carries everything: who you are and how to report back, your checkout's path (it runs from there without editing), how to run the app without disturbing anyone else's instance, and what "working" means for each path. Hold your edits until it reports, fix what failed, and release it. If you can't get one, run the paths yourself and say the check wasn't independent.
 
 ## Report
 
-Write a short markdown report at the path your caller names, or else `.context/code-health/<mode>/<YYYY-MM-DD>.md` (outside the repo if it doesn't ignore `.context/`), and `tower show` it. Its readers are the reviewer, who checks your evidence, and the next run, which picks up where you stopped. Give them what they need to verify each change and to continue: the area and why, each change with its evidence and the mode's extras, bugs found, what's left and how sure you are, and how the checks and reviews came out. When nothing was worth changing, say what you checked and why it was fine.
+Write a short markdown report at the path your caller names, or else `.context/code-health/<mode>/<YYYY-MM-DD>.md` (outside the repo if it doesn't ignore `.context/`), and show it to the user. Its readers are the reviewer, who checks your evidence, and the next run, which picks up where you stopped. Give them what they need to verify each change and to continue: the area and why, each change with its evidence and the mode's extras, bugs found, what's left and how sure you are, and how the checks and reviews came out. When nothing was worth changing, say what you checked and why it was fine.
 
 ## Pull request
 
@@ -153,6 +153,6 @@ When your caller asks for one and the run produced something meaningful, open it
 
 ## Final answer and ending the run
 
-End with what the next reader needs: the PR link or "no PR" and why, the area, what changed, the report path, bugs found, the review and end-to-end outcomes, and the next area. A policy's next run reads this.
+End with what the next reader needs: the PR link or "no PR" and why, the area, what changed, the report path, bugs found, the review and end-to-end outcomes, and the next area. A scheduled job's next run reads this.
 
-A policy run with no PR ends itself once its hires have gone home. With a PR, stay on duty: the user comes back to this worker to adjust it, in the same worktree and branch. Wait to be prompted rather than watching for activity.
+A scheduled run with no PR ends once the agents it started have finished. With a PR, stay available: the user may come back to this session to adjust it, in the same worktree and branch. Wait to be prompted rather than watching for activity.

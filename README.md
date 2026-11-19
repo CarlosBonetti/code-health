@@ -58,7 +58,7 @@ In Claude Code it also installs as a plugin:
 1. Reads the project's agent instructions and runs its checks for a baseline.
 2. Finds and ranks candidates for the mode, and (interactively) waits for you to choose.
 3. Makes one focused change, keeping behaviour unless the mode exists to change it.
-4. Gets the change reviewed by a worker without its context, and exercised end to end when it can reach runtime.
+4. Gets the change reviewed by an agent without its context, and exercised end to end when it can reach runtime.
 5. Writes a report to `.context/code-health/<mode>/<YYYY-MM-DD>.md`, and opens a PR only when asked.
 
 ## Why
@@ -78,12 +78,12 @@ steps or special cases.
 
 ## Requirements
 
-The skill is written for workers in [**the tower**](https://github.com/RegiByte/the-tower), a local HQ for Claude Code
-sessions: it uses the `tower` command to find itself, hire reviewers, leave notes and show its report. Run as a tower
-**policy**, it becomes standing work on a schedule, each run reading what the last one left.
+Any agent that loads skills. Reviews and end-to-end checks need a second agent without the run's context, such as a
+subagent or a separate session; where there is none, the run does the check itself and says it wasn't independent.
 
-Outside the tower the modes and rules still apply, but the review, end-to-end and reporting steps that call `tower`
-won't run as written.
+In [**the tower**](https://github.com/RegiByte/the-tower), a local HQ for Claude Code sessions, the skill uses the
+`tower` command to hire reviewers, leave notes and show its report, and run as a tower **policy** it becomes standing
+work on a schedule, each run reading what the last one left.
 
 ## Contributing
 

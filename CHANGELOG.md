@@ -4,6 +4,16 @@ All notable changes to this skill. The format follows [Keep a Changelog](https:/
 versions follow [Semantic Versioning](https://semver.org/): a new mode or rule is a minor, a renamed or removed mode or
 a changed argument is a major.
 
+## [0.3.0] - 2026-11-19
+
+### Changed
+
+- The skill works outside the tower: reviews and end-to-end checks use whatever fresh agent the environment offers,
+  and the report is shown to the user however the environment allows. Tower-specific commands sit in one conditional
+  paragraph that sends tower workers to `tower:handbook`.
+- "Policy run" is now "scheduled run", and the end of a run no longer assumes tower workers' lifecycle: a
+  scheduled run with no PR ends once its helpers have finished.
+
 ## [0.2.0] - 2026-11-13
 
 ### Changed

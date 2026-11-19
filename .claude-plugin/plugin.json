@@ -1,10 +1,10 @@
 {
   "name": "code-health",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Leave a codebase healthier in one focused, reviewable change: tests, abstractions, dead code, dependencies, security, performance, setup, docs, structure and onboarding.",
   "author": { "name": "Carlos Bonetti", "url": "https://github.com/CarlosBonetti" },
   "homepage": "https://github.com/CarlosBonetti/code-health",
   "repository": "https://github.com/CarlosBonetti/code-health",
   "license": "MIT",
-  "keywords": ["code-health", "refactoring", "tests", "dead-code", "dependencies", "security", "performance", "docs", "tower"]
+  "keywords": ["code-health", "refactoring", "tests", "dead-code", "dependencies", "security", "performance", "docs", "agent-skill", "tower"]
 }
